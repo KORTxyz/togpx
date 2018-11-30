@@ -99,7 +99,7 @@ function togpx( geojson, options ) {
       var coords = f.geometry.coordinates;
       if (f.geometry.type == "Point") coords = [coords];
       coords.forEach(function (coordinates) {
-        o = {
+        let o = {
           "@lat": coordinates[1],
           "@lon": coordinates[0],
           "name": options.featureTitle(f.properties),
@@ -118,7 +118,7 @@ function togpx( geojson, options ) {
       var coords = f.geometry.coordinates;
       var times = options.featureCoordTimes(f);
       if (f.geometry.type == "LineString") coords = [coords];
-      o = {
+      let o = {
         "name": options.featureTitle(f.properties),
         "desc": options.featureDescription(f.properties)
       };
@@ -146,7 +146,7 @@ function togpx( geojson, options ) {
     // Polygons / Multipolygons
     case "Polygon":
     case "MultiPolygon":
-      o = {
+      let o = {
         "name": options.featureTitle(f.properties),
         "desc": options.featureDescription(f.properties)
       };
@@ -191,8 +191,7 @@ function togpx( geojson, options ) {
       console.log("warning: unsupported geometry type: "+f.geometry.type);
     }
   });
-  gpx_str = JXON.stringify(gpx);
-  return gpx_str;
+  return JXON.stringify(gpx);
 };
 
 module.exports = togpx;
